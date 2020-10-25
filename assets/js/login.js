@@ -20,7 +20,7 @@ $(function () {
       // 如果判断失败,则return一个提示消息即可
       var pwd = $('.reg-box [name=password]').val()
       if (pwd !== value) {
-        return '两次密码不一致'
+        return '两次密码不一致' 
       }
     }
   });
@@ -31,7 +31,7 @@ $(function () {
       username: $('#form_reg [name=username]').val(),
       password: $('#form_reg [name=password]').val()
     };
-    $.post('http://ajax.frontend.itheima.net/api/reguser', data, function (res) {
+    $.post('/api/reguser', data, function (res) {
       if (res.status !== 0) {
         return layer.msg(res.message)
       };
@@ -42,12 +42,12 @@ $(function () {
   $('#form_login').submit(function (e) {
     e.preventDefault();
     $.ajax({
-      url: 'http://ajax.frontend.itheima.net/api/login', method: 'POST', data: $(this).serialize(), success: function (res) {
+      url: '/api/login', method: 'POST', data: $(this).serialize(), success: function (res) {
         if (res.status !== 0) {
           return layer.msg('登录失败')
         };
-        console.log(res);
         layer.msg('登录成功');
+        localStorage.setItem('token',res.token)
         location.href = '/index.html'
       }
     })
