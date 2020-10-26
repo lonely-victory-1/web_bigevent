@@ -12,11 +12,8 @@ $.ajaxPrefilter(function (options) {
   };
   // 统一挂载complate回调函数
   options.complete = function (res) {
-    console.log(res,1231313131321);
     if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
-      console.log(123456789);
       localStorage.removeItem('token');
-      console.log(res.responseJSON.status,res.responseJSON.message);
       location.href = '/login.html' 
     }
   }
